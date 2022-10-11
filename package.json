@@ -16,7 +16,7 @@
     "@types/node": "16.11.65",
     "@types/readline-sync": "1.4.4",
     "cross-env": "7.0.2",
-    "ts-node": "9.0.0",
+    "ts-node": "9.1.1",
     "typescript": "4.8.4"
   },
   "dependencies": {
