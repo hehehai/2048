@@ -212,10 +212,10 @@ ts-node@9.0.0:
     source-map-support "^0.5.17"
     yn "3.1.1"
 
-tty-events@^0.9.3:
-  version "0.9.3"
-  resolved "https://registry.npm.taobao.org/tty-events/download/tty-events-0.9.3.tgz#19dad5f2950cb9952471fad394b58bfa2d1bd1b5"
-  integrity sha1-GdrV8pUMuZUkcfrTlLWL+i0b0bU=
+tty-events@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tty-events/-/tty-events-1.0.0.tgz#54475ad7d985072079c3ffe8619f2f2d543662aa"
+  integrity sha512-9dBf9NXGmaTOtM1D4oqwSXVVAaoGyW+/rKUmEwd2FxaG0B4twdzauIBaXzrzKD3SB8lkmDTbyOE5xlXJ9sNAKg==
 
 typescript@4.8.4:
   version "4.8.4"

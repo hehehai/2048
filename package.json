@@ -24,6 +24,6 @@
     "cli-table3": "^0.6.0",
     "keypress": "^0.2.1",
     "readline-sync": "^1.4.10",
-    "tty-events": "^0.9.3"
+    "tty-events": "^1.0.0"
   }
 }
