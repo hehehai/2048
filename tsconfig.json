@@ -1,9 +1,14 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
+    // add Bun type definitions
+    "types": [
+      "bun-types"
+    ],
+
     "strict": true,
-    "target": "ES2017", // Node.js 8
-    "module": "CommonJS",
+    "target": "esnext",
+    "module": "esnext",
     "moduleResolution": "node",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -11,7 +16,7 @@
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": false,
     "outDir": "dist",
-    "lib": ["ES2017"]
+    "lib": ["esnext"]
   },
   "include": ["src"],
   "exclude": ["node_modules"]

@@ -4,13 +4,16 @@
 
 The source program is [go cli 2048](https://github.com/chhabraamit/2048), just convert by node.js
 
-![](2048.gif)
+![2048](2048.gif)
 
-# run
-- node (version > v10)
-- yarn or npm
+## run
+
+- bun: <https://bun.sh/>
 
 ``` cmd
-yarn install
-yarn start
+bun i
+bun dev
+
+# or
+bun build & bun start
 ```

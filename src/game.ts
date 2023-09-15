@@ -1,7 +1,7 @@
 import { max, randomInt } from "./util";
-import { bold } from "chalk";
-import * as Table from "cli-table3";
+import chalk from "chalk";
 import { getMoveKey } from "./listen";
+const Table = require("cli-table3");
 
 const _row = 4;
 const _col = 4;
@@ -47,7 +47,7 @@ export class Game {
     );
     printMatrix = this.printPreset(printMatrix);
     const newVal = printMatrix[this.newRow][this.newCol];
-    printMatrix[this.newRow][this.newCol] = bold.blue(newVal);
+    printMatrix[this.newRow][this.newCol] = chalk.blue.bold(newVal);
     cliTable.push(...printMatrix);
     console.log(cliTable.toString());
   }
