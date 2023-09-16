@@ -1,17 +1,33 @@
 #!/usr/bin/env node
 import { Game } from "./game";
 import { listenCliKey } from "./listen";
+import prompts from 'prompts'
+import { i18n } from './i18n';
+
 
 async function bootstrap() {
+  const response = await prompts({
+    type: 'select',
+    name: 'lang',
+    message: 'Pick a language / 选择语言',
+    choices: [
+      { title: 'English', value: 'en_us' },
+      { title: '中文', value: 'zh_cn' },
+    ],
+    initial: 1
+  });
+
+  const i = i18n[response.lang as keyof typeof i18n] ?? i18n.en_us;
+
   const debug = process.env.DEBUG;
   if (debug) {
-    console.log("model: debug");
+    console.log(`${i.model}: ${i.debug}`);
   }
-  console.log("Use {W A S D} or {h j k l} or Arrow keys to move the board");
-  console.log("Press any key to start");
+  console.log(i.startHelp);
+  console.log(i.start);
   const key = await listenCliKey();
   if (!key) {
-    console.log("break game input");
+    console.log(i.break);
     process.exit();
   }
   const game = new Game();
@@ -29,10 +45,10 @@ async function bootstrap() {
     await game.TakeInput();
   }
 
-  console.log("**** Game Over ****");
+  console.log(`**** ${i.over} ****`);
   const { maximum, total } = game.CountScore();
-  console.log("Score: Max Tile Value: ", maximum);
-  console.log("Score: Total Tiles Value: ", total);
+  console.log(`${i.scoreMax}: `, maximum);
+  console.log(`${i.scoreTotal}: `, total);
   process.exit();
 }
 
