@@ -32,21 +32,21 @@ async function bootstrap() {
   }
   const game = new Game();
 
-  game.AddElement();
-  game.AddElement();
+  game.addElement();
+  game.addElement();
 
   while (true) {
-    if (game.IsOver()) {
+    if (game.isOver()) {
       break;
     }
 
-    game.AddElement();
-    game.Display();
-    await game.TakeInput();
+    game.addElement();
+    game.display();
+    await game.takeInput();
   }
 
   console.log(`**** ${i.over} ****`);
-  const { maximum, total } = game.CountScore();
+  const { maximum, total } = game.countScore();
   console.log(`${i.scoreMax}: `, maximum);
   console.log(`${i.scoreTotal}: `, total);
   process.exit();

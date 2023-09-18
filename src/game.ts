@@ -8,12 +8,12 @@ const _col = 4;
 const probabilitySpace = 100;
 const probabilityOfTwo = 80;
 
-export enum moveKey {
-  up = 1,
-  down,
-  left,
-  right,
-  noDir,
+export enum MOVE_KEY {
+  Up = 1,
+  Down,
+  Left,
+  Right,
+  NoDir,
 }
 
 interface GameScore {
@@ -22,6 +22,11 @@ interface GameScore {
 }
 
 export class Game {
+  static _row = _row;
+  static _col = _col;
+  static probabilitySpace = probabilitySpace;
+  static probabilityOfTwo = probabilityOfTwo;
+
   matrix: number[][] = [];
   over = false;
   newRow = 0;
@@ -37,7 +42,12 @@ export class Game {
     }
   }
 
-  Display(): void {
+  /**
+   * Displays the matrix in a clear console table.
+   *
+   * @return {void} 
+   */
+  display(): void {
     console.clear();
     const cliTable = new Table({
       style: { "padding-left": 4, "padding-right": 4 },
@@ -52,7 +62,12 @@ export class Game {
     console.log(cliTable.toString());
   }
 
-  AddElement(): void {
+  /**
+   * Generates a new element and adds it to the matrix.
+   *
+   * @return {void} This function does not return anything.
+   */
+  addElement(): void {
     let val = randomInt(probabilitySpace);
     if (val < probabilityOfTwo) {
       val = 2;
@@ -87,25 +102,35 @@ export class Game {
     }
   }
 
-  async TakeInput(): Promise<void> {
+  /**
+   * Takes user input to determine the next move.
+   *
+   * @return {Promise<void>} This function does not return anything.
+   */
+  async takeInput(): Promise<void> {
     const key = await getMoveKey();
     switch (key) {
-      case moveKey.left:
+      case MOVE_KEY.Left:
         this.moveLeft();
         break;
-      case moveKey.right:
+      case MOVE_KEY.Right:
         this.moveRight();
         break;
-      case moveKey.up:
+      case MOVE_KEY.Up:
         this.moveUp();
         break;
-      case moveKey.down:
+      case MOVE_KEY.Down:
         this.moveDown();
         break;
     }
   }
 
-  IsOver(): boolean {
+  /**
+   * Determines if the game is over.
+   *
+   * @return {boolean} Returns true if the game is over, otherwise false.
+   */
+  isOver(): boolean {
     let empty = 0;
     for (let i = 0; i < _row; i++) {
       for (let j = 0; j < _col; j++) {
@@ -118,7 +143,12 @@ export class Game {
     return empty === 0 || this.over;
   }
 
-  CountScore(): GameScore {
+  /**
+   * Calculates the score for the game.
+   *
+   * @return {GameScore} The score of the game.
+   */
+  countScore(): GameScore {
     const result = {
       total: 0,
       maximum: 0,
@@ -160,7 +190,13 @@ export class Game {
     this.transpose();
   }
 
-  private printPreset(r: (number | string)[][]): number[][] {
+  /**
+   * Generates the function comment for the given function body.
+   *
+   * @param {Array<Array<number | string>>} r - The input array of arrays.
+   * @return {Array<Array<number>>} The modified array of arrays.
+   */
+  printPreset(r: (number | string)[][]): number[][] {
     const result = [];
     for (let i = 0; i < _row; i++) {
       result.push(Array(_col).fill(0));
@@ -174,7 +210,14 @@ export class Game {
     return result;
   }
 
-  private transpose() {
+  /**
+   * Transposes the matrix.
+   *
+   * @param {type} _row - description of parameter
+   * @param {type} _col - description of parameter
+   * @return {void} Does not return any value
+   */
+  transpose() {
     const result = [];
     for (let i = 0; i < _row; i++) {
       result.push(Array(_col).fill(0));
@@ -188,13 +231,25 @@ export class Game {
     this.matrix = result;
   }
 
-  private reverse() {
+  /**
+   * Reverses the elements in each row of the matrix.
+   *
+   * No parameters.
+   *
+   * No return value.
+   */
+  reverse() {
     for (let i = 0; i < _row; i++) {
       this.matrix[i] = this.matrix[i].reverse();
     }
   }
 
-  private reverseRows() {
+  /**
+   * Reverses the rows of the matrix.
+   *
+   * @return {void} 
+   */
+  reverseRows() {
     const result = [];
     for (let i = 0; i < _row; i++) {
       result.push(Array(_col).fill(0));
@@ -209,7 +264,13 @@ export class Game {
     this.matrix = result;
   }
 
-  private moveRow(r: number[]): number[] {
+  /**
+  * Move a row by removing all zeros and filling the remaining elements.
+  *
+  * @param {number[]} r - The row to be moved.
+  * @return {number[]} The moved row.
+  */
+  moveRow(r: number[]): number[] {
     let result = [];
     for (let i = 0; i < _col; i++) {
       if (r[i] !== 0) {
@@ -222,7 +283,13 @@ export class Game {
     return this.mergeElements(result);
   }
 
-  private rowFillInit(arr: number[]): number[] {
+  /**
+   * Fills the given array with zeros until it reaches the desired length.
+   *
+   * @param {number[]} arr - the original array
+   * @return {number[]} - the filled array
+   */
+  rowFillInit(arr: number[]): number[] {
     const result = [...arr];
     const remaining = _col - result.length;
     for (let i = 0; i < remaining; i++) {
@@ -231,7 +298,14 @@ export class Game {
     return result;
   }
 
-  private mergeElements(arr: number[]): number[] {
+  /**
+   * Merges elements in an array by adding consecutive elements that are equal,
+   * and returns the merged array.
+   *
+   * @param {number[]} arr - The array of numbers to merge.
+   * @return {number[]} - The merged array.
+   */
+  mergeElements(arr: number[]): number[] {
     let result = [];
     result[0] = arr[0];
     let index = 0;
