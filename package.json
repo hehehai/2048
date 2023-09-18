@@ -9,7 +9,8 @@
   "scripts": {
     "build": "bun build ./src/index.ts --outdir ./dist",
     "dev": "cross-env DEBUG=true bun --hot ./src/index.ts",
-    "start": "bun dist/index.js"
+    "start": "bun dist/index.js",
+    "test": "bun test"
   },
   "devDependencies": {
     "@types/chalk": "2.2.0",
