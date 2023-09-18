@@ -31,8 +31,8 @@ describe('Game', () => {
 
     game.moveLeft();
 
-    expect(game.matrix[0][0]).toEqual(4);
-    expect(game.matrix[0][1]).toEqual(4);
+    expect(game.matrix[0][0]).toEqual(8);
+    expect(game.matrix[0][1]).toEqual(0);
     expect(game.matrix[0][2]).toEqual(0);
   });
 
@@ -65,30 +65,55 @@ describe('Game', () => {
 
   // countScore
   it('should calculate total and max score correctly', () => {
-    game.matrix = [[2, 4], [8, 16]];
+    game.matrix = [
+      [2, 2, 8, 2],
+      [4, 8, 16, 2],
+      [128, 64, 32, 4],
+      [256, 512, 128, 16]
+    ];
 
     const result = game.countScore();
 
-    expect(result.total).toEqual(30);
-    expect(result.maximum).toEqual(16);
+    expect(result.total).toEqual(1184);
+    expect(result.maximum).toEqual(512);
   });
 
   // reverse
   it('should reverse row elements', () => {
-    game.matrix = [[1, 2, 3], [4, 5, 6]];
+    game.matrix = [
+      [2, 2, 8, 2],
+      [4, 8, 16, 2],
+      [128, 64, 32, 4],
+      [256, 512, 128, 16]
+    ]
 
     game.reverse();
 
-    expect(game.matrix).toEqual([[3, 2, 1], [6, 5, 4]]);
+    expect(game.matrix).toEqual([
+      [2, 8, 2, 2],
+      [2, 16, 8, 4],
+      [4, 32, 64, 128],
+      [16, 128, 512, 256]
+    ]);
   });
 
   // reverseRows
   it('should reverse all rows', () => {
-    game.matrix = [[1, 2], [3, 4]];
+    game.matrix = [
+      [2, 2, 8, 2],
+      [4, 8, 16, 2],
+      [128, 64, 32, 4],
+      [256, 512, 128, 16]
+    ];
 
     game.reverseRows();
 
-    expect(game.matrix).toEqual([[3, 4], [1, 2]]);
+    expect(game.matrix).toEqual([
+      [256, 512, 128, 16],
+      [128, 64, 32, 4],
+      [4, 8, 16, 2],
+      [2, 2, 8, 2],
+    ]);
   });
 
   // moveRow
@@ -97,7 +122,7 @@ describe('Game', () => {
 
     const result = game.moveRow(row);
 
-    expect(result).toEqual([4, 0, 0, 4]);
+    expect(result).toEqual([8, 0, 0, 0]);
   });
 
   // rowFillInit
@@ -115,6 +140,6 @@ describe('Game', () => {
 
     const result = game.mergeElements(row);
 
-    expect(result).toEqual([4, 4, 0, 0]);
+    expect(result).toEqual([8, 4, 0, 0]);
   });
 });

@@ -84,7 +84,7 @@ export class Game {
       }
     }
 
-    let elementCount = randomInt(empty) + 1;
+    let elementCount = Math.min(randomInt(empty) + 1, empty);
     let index = 0;
 
     for (let i = 0; i < _row; i++) {
